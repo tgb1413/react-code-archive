@@ -1,47 +1,11 @@
-import { useEffect, useRef, useState } from "react";
-
-const log = console.log;
-
-function Box() {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    log("mount 1 ", ref.current);
-
-    return () => {
-      setTimeout(() => log("unmount 1 ", ref.current), 0);
-    };
-  }, []);
-
-  useEffect(() => {
-    const element = ref.current;
-
-    log("mount 2 ", element);
-    return () => {
-      setTimeout(() => log("unmount 2 ", element), 0);
-    };
-  }, []);
-
-  return (
-    <div ref={ref} className="box">
-      Box
-    </div>
-  );
-}
+import { Route, Routes } from "react-router-dom";
+import { Case_useRef1 } from "./cases";
 
 function App() {
-  let [state, setState] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => setState(false), 1000);
-  }, []);
-
   return (
-    <div className="App">
-      <p>useEffect useRef warning</p>
-      <span>check the console tab</span>
-      {state && <Box />}
-    </div>
+    <Routes>
+      <Route element={<Case_useRef1 />} path="/useref1" />
+    </Routes>
   );
 }
 
